@@ -1,12 +1,24 @@
-<h1>PRODUCTOS MOTO</h1>
+<h1 class="titulo-productos">PRODUCTOS MOTO</h1>
+
+<!-- Filtro de categorías -->
+<div class="filtro-categorias">
+  <label for="categoria">Categoría:</label>
+  <select id="categoria" [(ngModel)]="category" (change)="filtrarProductos()">
+    <option value="">Todas</option>
+    <option value="ropa">Ropa</option>
+    <option value="accesorios">Accesorios</option>
+    <option value="repuestos">Repuestos</option>
+    <option value="electronica">Electrónica</option>
+  </select>
+</div>
 
 <section class="productos">
-  @for (producto of products; track producto.id) {
+  @for (producto of productosFiltrados; track producto.id) {
     <article class="producto">
       <img [src]="producto.image" [alt]="producto.name">
       <h3>{{ producto.name }}</h3>
       <p>{{ producto.description }}</p>
-      <strong>{{ producto.price }}</strong>
+      <strong>{{ producto.price | currency:'COP':'symbol':'1.0-0' }}</strong>
       <br>
       <button>Ver más</button>
     </article>

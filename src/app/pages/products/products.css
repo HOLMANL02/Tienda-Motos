@@ -1,10 +1,106 @@
-.productos{
-    display: flex;
-    flex-wrap: wrap;
+.productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* espacio entre productos */
+  justify-content: center; /* centra los productos */
+  padding: 20px;
 }
 
-.producto{
-    border: 1 px solid #ccc;
-    padding: 10px;
-    width: 25%;
+.producto {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 8px;
+  width: 150px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+   /* para que todos los cuadritos tengan la misma altura */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.producto:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.producto img {
+  max-width: 100%;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.producto h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.producto p {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.producto strong {
+  display: block;
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #27ae60;
+}
+
+.producto button {
+  background-color:linear-gradient(90deg, #ffea00,#3f3d2e);
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.producto button:hover {
+  background-color: #ffea00;
+}
+.titulo-productos {
+  font-family: 'Arial Black', sans-serif; /* Tipo de letra */
+  font-size: 2.5rem; /* Tamaño */
+  text-align: center; /* Centrado */
+  color: #2c3e50; /* Color del texto */
+  text-transform: uppercase; /* Poner todo en mayúsculas */
+  letter-spacing: 2px; /* Espaciado entre letras */
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.filtro-categorias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filtro-categorias label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.filtro-categorias select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.filtro-categorias select:hover,
+.filtro-categorias select:focus {
+  border-color: #ffc107;
+  outline: none;
 }
