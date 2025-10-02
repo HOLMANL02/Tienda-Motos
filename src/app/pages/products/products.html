@@ -1,19 +1,38 @@
 <h1 class="titulo-productos">PRODUCTOS HOME BY SAMHOL</h1>
 
-<!-- Filtro de categorías -->
-<div class="filtro-categorias">
-  <label for="categoria">Categoría:</label>
-  <select id="categoria" [(ngModel)]="category" (change)="filtrarProductos()">
-    <option value="">Todas</option>
-    <option value="ropa">Ropa</option>
-    <option value="accesorios">Accesorios</option>
-    <option value="repuestos">Repuestos</option>
-    <option value="electronica">Electrónica</option>
-  </select>
+<div class="filtro-texto">
+  <label for="busqueda">Buscar:</label>
+  <input
+    id="busqueda"
+    type="text"
+    placeholder="Escribe un producto..."
+    [(ngModel)]="textoBusqueda"
+    (input)="filtrarProductos()"
+  />
 </div>
 
+  <!-- Filtro de categorías -->
+  <div class="filtro-categorias">
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" [(ngModel)]="category" (change)="filtrarProductos()">
+      <option value="">Todas</option>
+      <option value="Camas">Camas</option>
+      <option value="Closet">Closet</option>
+      <option value="Salas">Salas</option>
+      <option value="Escritorios">Escritorios</option>
+      <option value="Comedores">Comedores</option>
+      <option value="Sillas">Sillas</option>
+      <option value="Mesas">Mesas</option>
+      <option value="Muebles de TV">Muebles de TV</option>
+      <option value="Bibliotecas">Bibliotecas</option>
+      <option value="Muebles de Exterior">Muebles de Exterior</option>
+      <option value="Accesorios">Accesorios</option>
+    </select>
+  </div>
+
+
 <section class="productos">
-  @for (producto of productosFiltrados; track producto.id) {
+    @for (producto of productosPaginados; track producto.id) {
     <article class="producto">
       <img [src]="producto.image" [alt]="producto.name">
       <h3>{{ producto.name }}</h3>
@@ -23,4 +42,16 @@
       <button>Ver más</button>
     </article>
   }
+  
 </section>
+<!-- Controles de paginación -->
+<div class="paginacion">
+  <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
+    ⬅ Anterior
+  </button>
+
+  <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+
+  <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
+    Siguiente ➡
+  </button>

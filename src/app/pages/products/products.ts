@@ -20,7 +20,9 @@ export class ProductosComponent {   /** Lista completa de productos obtenidos de
   products: Product[] = []; /** Lista de productos filtrados según la categoría seleccionada */
   productosFiltrados: Product[] = [];
   category: string = ''; /** Categoría seleccionada en el select (por defecto vacía = todas las categorías) */
-
+  textoBusqueda: string = ''; /** Texto escrito en el buscador para filtrar por nombre ('' = sin filtro) */
+  paginaActual: number = 1;
+  productosPorPagina: number = 22;
   /**
    * Constructor del componente.
    * 
@@ -35,22 +37,36 @@ export class ProductosComponent {   /** Lista completa de productos obtenidos de
   }
 
   /**
-   * Filtra los productos en función de la categoría seleccionada.
-   * 
-   * Si no hay categoría seleccionada (`category === ''`), se muestran todos los productos.
-   * Si hay categoría seleccionada, solo se muestran los que coincidan con ella.
+   * Filtra los productos combinando categoría y texto de búsqueda.
    *
-   * @returns void
+   * Reglas:
+   * - Si category === '' se aceptan todas las categorías.
+   * - Si searchTerm está vacío se ignora el filtro por texto.
+   * - La búsqueda por texto es case-insensitive y utiliza includes().
    */
-  filtrarProductos(): void {
-    if (this.category === '') {
-      // Mostrar todos los productos si no hay categoría seleccionada
-      this.productosFiltrados = [...this.products];
-    } else {
-      // Filtrar productos por categoría
-      this.productosFiltrados = this.products.filter(
-        p => p.category === this.category
-      );
-    }
+filtrarProductos() {
+  this.productosFiltrados = this.products.filter(p => {
+    const coincideCategoria = this.category === '' || p.category === this.category;
+    const coincideTexto = this.textoBusqueda === '' || p.name.toLowerCase().includes(this.textoBusqueda.toLowerCase());
+    return coincideCategoria && coincideTexto;
+  });
+  this.paginaActual = 1; // Reinicia a la primera página
+}
+
+
+// Obtener productos de la página actual
+  get productosPaginados(): Product[] {
+    const inicio = (this.paginaActual - 1) * this.productosPorPagina;
+    return this.productosFiltrados.slice(inicio, inicio + this.productosPorPagina);
+  }
+
+  cambiarPagina(nuevaPagina: number) {
+    this.paginaActual = nuevaPagina;
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(this.productosFiltrados.length / this.productosPorPagina);
   }
 }
+
+
