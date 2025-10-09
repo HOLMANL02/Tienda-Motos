@@ -24,10 +24,162 @@
 
   <!-- Colores de tema para móviles -->
   <meta name="theme-color" content="#2c3e50">
+
+  <!-- 💅 Estilos del header -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+    .main-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .nav-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo span {
+      color: #fdd835;
+    }
+
+    .nav-logo:hover {
+      color: #fdd835;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      color: #eaeaea;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fdd835;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(8px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.4s ease;
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-bar {
+        padding: 18px 25px;
+      }
+
+      .nav-logo {
+        font-size: 1.4rem;
+      }
+    }
+
+    .main-header.scrolled {
+      background: rgba(0, 0, 0, 0.85);
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+    }
+  </style>
 </head>
 <body>
+
+  <!-- 💎 Header fijo -->
+  <header class="main-header">
+    <nav class="nav-bar">
+      <a class="nav-logo" routerLink="/">
+        <i class="fas fa-couch"></i> HOUSE <span>BY SAMHOL</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a routerLink="/">Inicio</a>
+        <a routerLink="/products">Productos</a>
+        <a routerLink="/contact">Contáctanos</a>
+        <a routerLink="/about">Acerca de</a>
+      </div>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 🌐 Tu aplicación Angular -->
   <app-root></app-root>
 
+  <!-- ⚙️ Script para menú y scroll -->
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    const header = document.querySelector('.main-header');
+
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('active');
+    });
+
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
 
 </body>
 </html>
