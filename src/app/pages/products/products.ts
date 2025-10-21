@@ -10,63 +10,88 @@ import { ProductService, Product } from '../../services/products';
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
-/**
- * Componente encargado de mostrar la lista de productos.
- *
- * Permite filtrar productos por categoría mediante un select desplegable
- * y mostrar dinámicamente los resultados en la plantilla. */
-
-export class ProductosComponent {   /** Lista completa de productos obtenidos del servicio */
-  products: Product[] = []; /** Lista de productos filtrados según la categoría seleccionada */
+export class ProductosComponent {
+  products: Product[] = [];
   productosFiltrados: Product[] = [];
-  category: string = ''; /** Categoría seleccionada en el select (por defecto vacía = todas las categorías) */
-  textoBusqueda: string = ''; /** Texto escrito en el buscador para filtrar por nombre ('' = sin filtro) */
+  category: string = '';
+  textoBusqueda: string = '';
   paginaActual: number = 1;
   productosPorPagina: number = 15;
-  /**
-   * Constructor del componente.
-   * 
-   * Se inyecta el `ProductService` para obtener los productos
-   * y se inicializa la lista `productosFiltrados` con todos los productos.
-   *
-   * @param productService Servicio que proporciona los productos disponibles
-   */
+  sidebarVisible: boolean = false; // Control del sidebar en móvil
+
   constructor(private productService: ProductService) {
     this.products = this.productService.getProducts();
-    this.productosFiltrados = [...this.products]; // Mostrar todos al inicio
+    this.productosFiltrados = [...this.products];
   }
 
   /**
-   * Filtra los productos combinando categoría y texto de búsqueda.
-   *
-   * Reglas:
-   * - Si category === '' se aceptan todas las categorías.
-   * - Si searchTerm está vacío se ignora el filtro por texto.
-   * - La búsqueda por texto es case-insensitive y utiliza includes().
+   * Filtra productos por categoría y texto de búsqueda
    */
-filtrarProductos() {
-  this.productosFiltrados = this.products.filter(p => {
-    const coincideCategoria = this.category === '' || p.category === this.category;
-    const coincideTexto = this.textoBusqueda === '' || p.name.toLowerCase().includes(this.textoBusqueda.toLowerCase());
-    return coincideCategoria && coincideTexto;
-  });
-  this.paginaActual = 1; // Reinicia a la primera página
-}
+  filtrarProductos() {
+    this.productosFiltrados = this.products.filter(p => {
+      const coincideCategoria = this.category === '' || p.category === this.category;
+      const coincideTexto = this.textoBusqueda === '' || 
+        p.name.toLowerCase().includes(this.textoBusqueda.toLowerCase());
+      return coincideCategoria && coincideTexto;
+    });
+    this.paginaActual = 1;
+  }
 
+  /**
+   * Selecciona una categoría y filtra
+   */
+  seleccionarCategoria(categoria: string) {
+    this.category = categoria;
+    this.filtrarProductos();
+    // Cerrar sidebar en móvil al seleccionar
+    if (window.innerWidth <= 768) {
+      this.sidebarVisible = false;
+    }
+  }
 
-// Obtener productos de la página actual
+  /**
+   * Limpia todos los filtros
+   */
+  limpiarFiltros() {
+    this.category = '';
+    this.textoBusqueda = '';
+    this.filtrarProductos();
+  }
+
+  /**
+   * Cuenta productos por categoría
+   */
+  contarPorCategoria(categoria: string): number {
+    return this.products.filter(p => p.category === categoria).length;
+  }
+
+  /**
+   * Toggle para mostrar/ocultar sidebar en móvil
+   */
+  toggleSidebar() {
+    this.sidebarVisible = !this.sidebarVisible;
+  }
+
+  /**
+   * Obtener productos paginados
+   */
   get productosPaginados(): Product[] {
     const inicio = (this.paginaActual - 1) * this.productosPorPagina;
     return this.productosFiltrados.slice(inicio, inicio + this.productosPorPagina);
   }
 
+  /**
+   * Cambiar página
+   */
   cambiarPagina(nuevaPagina: number) {
     this.paginaActual = nuevaPagina;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  /**
+   * Total de páginas
+   */
   get totalPaginas(): number {
     return Math.ceil(this.productosFiltrados.length / this.productosPorPagina);
   }
 }
-
-

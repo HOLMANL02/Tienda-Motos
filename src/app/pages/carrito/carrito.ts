@@ -1,26 +1,22 @@
-import { signal, computed } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CarritoService } from '../../services/carrito';
 
-export interface Producto {
-  id: number;
-  nombre: string;
-  precio: number;
-}
+@Component({
+  selector: 'app-carrito',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './carrito.html',
+  styleUrls: ['./carrito.css']
+})
+export class CarritoComponent {
+  constructor(public carritoService: CarritoService) {}
 
-export const cartItems = signal<Producto[]>([]);
+  remove(id: number) {
+    this.carritoService.removeFromCart(id);
+  }
 
-export const totalItems = computed(() => cartItems().length);
-export const totalPrice = computed(() => 
-  cartItems().reduce((acc, p) => acc + p.precio, 0)
-);
-
-export function addToCart(producto: Producto) {
-  cartItems.update(items => [...items, producto]);
-}
-
-export function removeFromCart(id: number) {
-  cartItems.update(items => items.filter(p => p.id !== id));
-}
-
-export function clearCart() {
-  cartItems.set([]);
+  clear() {
+    this.carritoService.clearCart();
+  }
 }
