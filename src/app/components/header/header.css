@@ -1,88 +1,67 @@
-.main-header {
-  /* Degradado de grises más elegante */
-  background: linear-gradient(90deg, #9aa0a8 0%, #3e434b 50%, #1a1c20 100%);
-  padding: 16px 0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
-.main-header.scrolled {
-  /* Degradado de grises más oscuros para cuando haces scroll */
-  background: linear-gradient(90deg, #2d3036 0%, #1e2125 50%, #121315 100%);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+.main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .nav-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 0 36px;
 }
 
 .nav-logo {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #f1c40f;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: transform 0.3s ease, color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
-.nav-logo i {
-  font-size: 1.6rem;
+.nav-logo span {
+  color: #fdd835;
 }
 
 .nav-logo:hover {
-  color: #fff;
-  transform: scale(1.05);
+  color: #fdd835;
 }
 
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 35px;
 }
 
 .nav-links a {
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: #eaeaea;
   text-decoration: none;
-  padding: 6px 10px;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -6px;
-  width: 0;
-  height: 3px;
-  background: #f1c40f;
-  transition: width 0.3s ease, left 0.3s ease;
-  border-radius: 2px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: #f1c40f;
+  color: #fdd835;
+  transform: translateY(-2px);
 }
 
-.nav-links a:hover::after {
-  width: 100%;
-  left: 0;
-}
-
-
-.nav-toggle {
+/* ---- Menú hamburguesa ---- */
+.menu-toggle {
   display: none;
   font-size: 1.8rem;
   color: #fff;
@@ -90,38 +69,75 @@
   transition: transform 0.3s ease;
 }
 
-.nav-toggle:hover {
+.menu-toggle:hover {
   transform: rotate(90deg);
 }
 
-
-@media (max-width: 768px) {
+/* ---- Responsivo ---- */
+@media (max-width: 900px) {
   .nav-links {
-    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(8px);
     flex-direction: column;
-    background: rgba(22, 27, 36, 0.95);
-    position: absolute;
-    top: 65px;
-    right: 20px;
-    padding: 18px 26px;
-    border-radius: 12px;
-    gap: 18px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    animation: slideDown 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    transition: right 0.4s ease;
+    z-index: 999;
   }
 
   .nav-links.active {
-    display: flex;
+    right: 0;
   }
 
-  .nav-toggle {
+  .menu-toggle {
     display: block;
   }
+
+  .nav-bar {
+    padding: 18px 25px;
+  }
+
+  .nav-logo {
+    font-size: 1.4rem;
+  }
 }
 
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-15px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* ---- Efecto scroll ---- */
+.main-header.scrolled {
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
 }
-  
+.cart-icon {
+  position: relative;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.cart-icon:hover {
+  color: #fdd835;
+  transform: scale(1.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #fdd835;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

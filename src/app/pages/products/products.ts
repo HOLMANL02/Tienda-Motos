@@ -22,7 +22,7 @@ export class ProductosComponent {   /** Lista completa de productos obtenidos de
   category: string = ''; /** Categoría seleccionada en el select (por defecto vacía = todas las categorías) */
   textoBusqueda: string = ''; /** Texto escrito en el buscador para filtrar por nombre ('' = sin filtro) */
   paginaActual: number = 1;
-  productosPorPagina: number = 22;
+  productosPorPagina: number = 15;
   /**
    * Constructor del componente.
    * 

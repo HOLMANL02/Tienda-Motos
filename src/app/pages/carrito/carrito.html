@@ -1,0 +1,16 @@
+<h2>Tu carrito</h2>
+
+<div *ngIf="cartItems().length === 0" class="empty-cart">
+  No hay productos en el carrito.
+</div>
+
+<div *ngFor="let p of cartItems()" class="cart-item">
+  <h4>{{ p.nombre }}</h4>
+  <p>{{ p.precio | currency:'COP' }}</p>
+  <button (click)="remove(p.id)">Eliminar</button>
+</div>
+
+<hr>
+
+<h3>Total: {{ totalPrice() | currency:'COP' }}</h3>
+<button (click)="clear()">Vaciar carrito</button>
