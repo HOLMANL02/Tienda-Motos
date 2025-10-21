@@ -1,14 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService, Product } from '../../services/products';
+import { CarritoService } from '../../services/carrito';
+
+// Imports de Material
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
+// Componente del dialog
+import { ProductDetailDialogComponent } from '../../components/product-detail-dialog/product-detail-dialog';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.html',
   styleUrls: ['./products.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [
+    CommonModule, 
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatSnackBarModule
+  ]
 })
 export class ProductosComponent {
   products: Product[] = [];
@@ -17,11 +36,54 @@ export class ProductosComponent {
   textoBusqueda: string = '';
   paginaActual: number = 1;
   productosPorPagina: number = 15;
-  sidebarVisible: boolean = false; // Control del sidebar en móvil
+  sidebarVisible: boolean = false;
 
-  constructor(private productService: ProductService) {
+  private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+
+  constructor(
+    private productService: ProductService,
+    private carritoService: CarritoService
+  ) {
     this.products = this.productService.getProducts();
     this.productosFiltrados = [...this.products];
+  }
+
+  /**
+   * Abre el dialog con detalles del producto
+   */
+  verDetalle(producto: Product) {
+    const dialogRef = this.dialog.open(ProductDetailDialogComponent, {
+      data: producto,
+      width: '800px',
+      maxWidth: '95vw',
+      panelClass: 'product-dialog-container'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.action === 'add-to-cart') {
+        this.agregarAlCarrito(result.product);
+      }
+    });
+  }
+
+  /**
+   * Agrega un producto al carrito con notificación Material
+   */
+  agregarAlCarrito(producto: Product) {
+    this.carritoService.addToCart({
+      id: producto.id,
+      nombre: producto.name,
+      precio: producto.price
+    });
+    
+    // Notificación con MatSnackBar
+    this.snackBar.open(`${producto.name} agregado al carrito ✓`, 'Cerrar', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      panelClass: ['success-snackbar']
+    });
   }
 
   /**
@@ -43,7 +105,6 @@ export class ProductosComponent {
   seleccionarCategoria(categoria: string) {
     this.category = categoria;
     this.filtrarProductos();
-    // Cerrar sidebar en móvil al seleccionar
     if (window.innerWidth <= 768) {
       this.sidebarVisible = false;
     }

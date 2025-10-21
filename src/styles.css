@@ -49,3 +49,21 @@ body { font-family: Arial, Helvetica, sans-serif;
   margin: 0 auto;
   max-width: 1200px; /* no crecer demasiado en pantallas grandes */
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* === MATERIAL SNACKBAR PERSONALIZADO === */
+.success-snackbar {
+  background-color: #27ae60 !important;
+  color: white !important;
+}
+
+.success-snackbar .mat-mdc-button {
+  color: white !important;
+}
+
+/* === DIALOG PERSONALIZADO === */
+.product-dialog-container .mat-mdc-dialog-container {
+  padding: 0;
+  overflow: hidden;
+}

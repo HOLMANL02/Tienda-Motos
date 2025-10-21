@@ -1,18 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap');
 
 .home-section {
-  min-height: 100vh;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  background: url('/Imagenes/fondo.jpg') no-repeat center/cover;
+  color: white;
   font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  color: #fff;
-  overflow: hidden;
 }
 
+/* Capas de fondo (una por imagen) */
+.home-section::before,
+.home-section::after,
+.home-section .bg-third {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 15s ease-in-out;
+  z-index: 0;
+}
+
+/* Imagen 1 */
+.home-section::before {
+  background-image: url('/Imagenes/fondo1.jpg');
+  animation: fade1 18s infinite;
+}
+
+/* Imagen 2 */
+.home-section::after {
+  background-image: url('/Imagenes/fondo2.jpg');
+  animation: fade2 18s infinite;
+}
+
+/* Imagen 3 (usamos un div extra para el tercer fondo) */
+.home-section .bg-third {
+  background-image: url('/Imagenes/fondo3.jpg');
+  animation: fade3 18s infinite;
+}
+
+/* Overlay oscuro para mejorar contraste del texto */
+.home-section .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Contenido */
+.home-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Animaciones de opacidad sincronizadas */
+@keyframes fade1 {
+  0%, 33% { opacity: 1; }
+  33.1%, 100% { opacity: 0; }
+}
+
+@keyframes fade2 {
+  0%, 33% { opacity: 0; }
+  33.1%, 66% { opacity: 1; }
+  66.1%, 100% { opacity: 0; }
+}
+
+@keyframes fade3 {
+  0%, 66% { opacity: 0; }
+  66.1%, 100% { opacity: 1; }
+}
+
+.highlight {
+  color: #ffea00;
+  text-shadow: 0 0 18px rgba(255, 234, 0, 0.9);
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.highlight-sub {
+  color: #ffea00;
+  text-shadow: 0 0 12px rgba(255, 234, 0, 0.7);
+  font-weight: 700;
+  font-size: 4rem; /* un poco más pequeño */
+  display: block;
+  margin-top: 8px;
+}
 .home-content {
   max-width: 850px;
   padding: 50px 40px;

@@ -1,8 +1,4 @@
 <div class="products-container">
-  <!-- Botón para abrir/cerrar sidebar en móvil -->
-  <button class="sidebar-toggle" (click)="toggleSidebar()">
-    <i class="fas fa-filter"></i> Filtros
-  </button>
 
   <!-- SIDEBAR LATERAL IZQUIERDO -->
   <aside class="sidebar" [class.active]="sidebarVisible">
@@ -98,14 +94,23 @@
     <!-- Grid de Productos -->
     <section class="productos">
       @for (producto of productosPaginados; track producto.id) {
-        <article class="producto">
-          <img [src]="producto.image" [alt]="producto.name">
-          <h3>{{ producto.name }}</h3>
-          <p>{{ producto.description }}</p>
-          <strong>{{ producto.price | currency:'COP':'symbol':'1.0-0' }}</strong>
-          <br>
-          <button>Ver más</button>
-        </article>
+        <mat-card class="producto">
+          <img mat-card-image [src]="producto.image" [alt]="producto.name">
+          <mat-card-content>
+            <h3>{{ producto.name }}</h3>
+            <p class="description">{{ producto.description }}</p>
+            <strong class="price">{{ producto.price | currency:'COP':'symbol':'1.0-0' }}</strong>
+          </mat-card-content>
+          <mat-card-actions class="producto-actions">
+            <button mat-raised-button color="accent" (click)="verDetalle(producto)">
+              <mat-icon>visibility</mat-icon>
+              Ver más
+            </button>
+            <button mat-mini-fab color="primary" (click)="agregarAlCarrito(producto)">
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
       }
       
       @if (productosFiltrados.length === 0) {

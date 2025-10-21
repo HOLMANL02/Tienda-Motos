@@ -1,0 +1,172 @@
+/* ===== MODAL DE PRODUCTO ===== */
+.product-dialog {
+  position: relative;
+  max-width: 800px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Botón de cerrar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background: linear-gradient(135deg, #fdd835, #fbc02d);
+  color: #1a1a1a;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(253, 216, 53, 0.3);
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(253, 216, 53, 0.4);
+}
+
+/* Contenido del diálogo */
+.dialog-content {
+  display: flex;
+  gap: 30px;
+  padding: 25px;
+  align-items: flex-start;
+}
+
+.image-section {
+  flex: 1;
+  max-width: 400px;
+}
+
+.image-section img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Sección de información */
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #2c3e50;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+/* Categoría */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fdd835, #fbc02d);
+  color: #1a1a1a;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: 600;
+  width: fit-content;
+  box-shadow: 0 2px 6px rgba(253, 216, 53, 0.3);
+}
+
+.category-badge mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Descripción */
+.description {
+  color: #7f8c8d;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Precio */
+.price-section {
+  padding: 15px 0;
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+  text-align: left;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+/* Botones */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.actions button {
+  flex: 1;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Botón principal (Agregar al carrito) */
+.actions button:first-child {
+  background: linear-gradient(135deg, #fdd835, #fbc02d);
+  color: #1a1a1a;
+}
+
+.actions button:first-child:hover {
+  box-shadow: 0 4px 10px rgba(253, 216, 53, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Botón secundario (Ver más, cerrar, etc.) */
+.actions button:last-child {
+  background: linear-gradient(135deg, #e62525);
+  color: white;
+}
+
+.actions button:last-child:hover {
+  background: linear-gradient(135deg, #bf1a15);
+  box-shadow: 0 4px 10px rgba(232, 63, 26, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .dialog-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .image-section {
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}

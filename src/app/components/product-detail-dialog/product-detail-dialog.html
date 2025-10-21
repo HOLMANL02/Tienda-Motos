@@ -1,0 +1,34 @@
+<div class="product-dialog">
+  <button mat-icon-button class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="dialog-content">
+    <div class="image-section">
+      <img [src]="data.image" [alt]="data.name">
+    </div>
+
+    <div class="info-section">
+      <h2 mat-dialog-title>{{ data.name }}</h2>
+
+      <div class="category-badge">
+        <mat-icon>category</mat-icon>
+        <span>{{ data.category }}</span>
+      </div>
+
+      <p class="description">{{ data.description }}</p>
+
+      <div class="price-section">
+        <span class="price">{{ data.price | currency:'COP':'symbol':'1.0-0' }}</span>
+      </div>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="addToCart()">
+          <mat-icon>shopping_cart</mat-icon>
+          Agregar al Carrito
+        </button>
+        <button mat-stroked-button (click)="close()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
