@@ -2,30 +2,72 @@
   <button mat-icon-button class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
-
   <div class="dialog-content">
     <div class="image-section">
       <img [src]="data.image" [alt]="data.name">
     </div>
-
     <div class="info-section">
       <h2 mat-dialog-title>{{ data.name }}</h2>
+      
+      <!-- Slogan -->
+      <p class="slogan" *ngIf="data.slogan">
+        <em>{{ data.slogan }}</em>
+      </p>
 
       <div class="category-badge">
         <mat-icon>category</mat-icon>
         <span>{{ data.category }}</span>
       </div>
 
-      <p class="description">{{ data.description }}</p>
-
-      <div class="price-section">
-        <span class="price">{{ data.price | currency:'COP':'symbol':'1.0-0' }}</span>
+      <!-- Características Destacadas -->
+      <div class="features-section" *ngIf="data.features && data.features.length > 0">
+        <h3>Características Destacadas:</h3>
+        <ul class="features-list">
+          <li *ngFor="let feature of data.features">
+            <mat-icon class="check-icon">check_circle</mat-icon>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
       </div>
 
+      <!-- Incluye -->
+      <div class="includes-section" *ngIf="data.includes && data.includes.length > 0">
+        <h3>Incluye:</h3>
+        <ul class="includes-list">
+          <li *ngFor="let item of data.includes">
+            <mat-icon class="check-icon">check_circle</mat-icon>
+            <span>{{ item }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Precio -->
+      <div class="price-section">
+        <span class="price">{{ data.price | currency:'COP ':'symbol':'1.0-0' }}</span>
+        <span class="price-badge">¡Oferta por Tiempo Limitado!</span>
+      </div>
+
+      
+
+      <div class="call-to-action">
+        <p class="cta-text">
+          <strong>Imagina tu espacio...</strong>
+        </p>
+        <ul class="benefits-list">
+          <li>✨ Sientete renovado.</li>
+          <li>✨ Disfruta de tranquilidad.</li>
+          <li>✨ Crea el espcio perfecto.</li>
+        </ul>
+        <p class="final-message">
+          <strong>¡No esperes más para darle a tu descanso el valor se merece!</strong>
+        </p>
+      </div>
+
+      <!-- Acciones -->
       <div class="actions">
-        <button mat-raised-button color="primary" (click)="addToCart()">
+        <button mat-raised-button color="primary" class="add-cart-btn" (click)="addToCart()">
           <mat-icon>shopping_cart</mat-icon>
-          Agregar al Carrito
+          Añadir al Carrito
         </button>
         <button mat-stroked-button (click)="close()">Cerrar</button>
       </div>
