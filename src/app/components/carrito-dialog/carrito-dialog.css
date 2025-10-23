@@ -1,0 +1,122 @@
+.carrito-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.carrito-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.carrito-cabecera h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.icono-carrito {
+  font-size: 2rem;
+  color: #fbbc04; /* Amarillo cálido */
+}
+
+.carrito-vacio {
+  text-align: center;
+  color: #aaa;
+  padding: 40px 0;
+}
+
+.icono-vacio {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #fbbc04; /* También amarillo */
+}
+
+.carrito-lista .carrito-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-detalles {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-nombre {
+  font-weight: 500;
+  color: #333;
+}
+
+.item-precio-unitario {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.item-cantidades {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.item-cantidad {
+  min-width: 20px;
+  text-align: center;
+}
+
+.item-precio-total {
+  font-weight: 600;
+  color: #fbbc04; /* Amarillo */
+  min-width: 80px;
+  text-align: right;
+}
+
+.carrito-resumen {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resumen-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.resumen-acciones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button.mat-raised-button.mat-primary {
+  background-color: #fbbc04; /* Amarillo botones */
+  color: #fff;
+}
+
+button.mat-raised-button.mat-primary:hover {
+  background-color: #fdd663;
+}

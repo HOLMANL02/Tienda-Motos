@@ -20,11 +20,13 @@
         class="search-input"
       />
     </div>
-    
+  
 
     <!-- Filtro por categorías -->
     <div class="filter-section">
       <label><i class="fas fa-th-large"></i> Categorías</label>
+
+        
       <!-- Botón limpiar filtros -->
     <button class="clear-filters" (click)="limpiarFiltros()">
       <i class="fas fa-redo"></i> Limpiar Filtros
@@ -80,7 +82,10 @@
         </div>
       </div>
     </div>
-
+ <!-- Botón para mostrar carrito -->
+  <button class="clear-filters" (click)="mostrarCarrito()">
+    <i class="fas fa-shopping-cart"></i> Ver Carrito 
+  </button>
   </aside>
 
   <!-- CONTENIDO PRINCIPAL -->
@@ -92,6 +97,9 @@
       </p>
     </div>
 
+  
+  <br>
+<br>
     <!-- Grid de Productos -->
     <section class="productos">
       @for (producto of productosPaginados; track producto.id) {
@@ -136,6 +144,8 @@
     </div>
   </main>
 </div>
+
+
 
 <!-- Overlay para cerrar sidebar en móvil -->
 <div class="sidebar-overlay" [class.active]="sidebarVisible" (click)="toggleSidebar()"></div>

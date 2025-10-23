@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService, Product } from '../../services/products';
 import { CarritoService } from '../../services/carrito';
+import { CarritoDialogComponent } from '../../components/carrito-dialog/carrito-dialog';
 
 // Imports de Material
 import { MatCardModule } from '@angular/material/card';
@@ -74,7 +75,8 @@ export class ProductosComponent {
     this.carritoService.addToCart({
       id: producto.id,
       nombre: producto.name,
-      precio: producto.price
+      precio: producto.price,
+        imagen: producto.image
     });
     
     // Notificación con MatSnackBar
@@ -155,4 +157,17 @@ export class ProductosComponent {
   get totalPaginas(): number {
     return Math.ceil(this.productosFiltrados.length / this.productosPorPagina);
   }
+ mostrarCarrito() {
+  const dialogRef = this.dialog.open(CarritoDialogComponent, {
+    width: '600px',
+    height: '700px',
+    maxWidth: '95vw',
+    panelClass: 'carrito-dialog-container'
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    console.log('El carrito se cerró');
+  });
+}
+
 }

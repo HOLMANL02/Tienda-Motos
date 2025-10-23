@@ -54,7 +54,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* === MATERIAL SNACKBAR PERSONALIZADO === */
 .success-snackbar {
-  background-color: #27ae60 !important;
+  background-color: #d0f15b !important;
   color: white !important;
 }
 
@@ -66,4 +66,42 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .product-dialog-container .mat-mdc-dialog-container {
   padding: 0;
   overflow: hidden;
+}
+/* --- Solución solo para el carrito --- */
+.carrito-dialog-container .mat-mdc-dialog-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.carrito-dialog-container .mat-mdc-dialog-surface {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Fondo oscuro detrás del carrito */
+.cdk-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(2px);
+}
+
+/* --- Contenedor principal del carrito --- */
+.carrito-container {
+  background: #fff;
+  color: #000;
+  border-radius: 16px;
+  padding: 25px;
+  width: 700px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 85vh;
+}
+.carrito-container img.img-mini {
+  width: 40px !important;
+  height: 40px !important;
 }

@@ -1,0 +1,67 @@
+<div class="carrito-container">
+  <!-- Cabecera -->
+  <div class="carrito-cabecera">
+    <mat-icon class="icono-carrito">shopping_cart</mat-icon>
+    <h2>Tu Carrito</h2>
+  </div>
+
+  <!-- Carrito vacío -->
+  <div *ngIf="items().length === 0" class="carrito-vacio">
+    <mat-icon class="icono-vacio">remove_shopping_cart</mat-icon>
+    <p>Tu carrito está vacío</p>
+  </div>
+
+  <!-- Lista de productos -->
+  <div *ngIf="items().length > 0" class="carrito-lista">
+    <div class="carrito-item" *ngFor="let item of items()">
+      <div class="item-info">
+        <img
+          *ngIf="item.imagen"
+          [src]="formatImagePath(item.imagen)"
+          alt="{{ item.nombre }}"
+          class="item-img"
+        />
+        <div class="item-detalles">
+          <span class="item-nombre">{{ item.nombre }}</span>
+          <span class="item-precio-unitario">
+            {{ item.precio | currency: 'COP':'symbol':'1.0-0' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="item-cantidades">
+        <button mat-icon-button (click)="cambiarCantidad(item, -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span class="item-cantidad">{{ item.cantidad || 1 }}</span>
+        <button mat-icon-button (click)="cambiarCantidad(item, 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <span class="item-precio-total">
+        {{ item.precio * (item.cantidad || 1) | currency: 'COP':'symbol':'1.0-0' }}
+      </span>
+
+      <button mat-icon-button color="warn" (click)="eliminar(item.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <!-- Resumen y acciones -->
+    <div class="carrito-resumen">
+      <div class="resumen-total">
+        <span><strong>Total ({{ totalItems() }} productos):</strong></span>
+        <span class="resumen-valor">
+          {{ totalPrice() | currency: 'COP':'symbol':'1.0-0' }}
+        </span>
+      </div>
+
+      <div class="resumen-acciones">
+        <button mat-stroked-button color="warn" (click)="vaciarCarrito()">Vaciar</button>
+        <button mat-stroked-button color="basic" (click)="cerrar()">Cerrar</button>
+        <button mat-raised-button color="primary" (click)="confirmarCompra()">Confirmar compra</button>
+      </div>
+    </div>
+  </div>
+</div>
