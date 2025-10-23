@@ -8,4 +8,62 @@ img{
 }
 
 body { font-family: Arial, Helvetica, sans-serif;
+
+
+    /* === ESTILOS GLOBALES RESPONSIVE === */
+
+}/* Celulares */
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .contenedor {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Tablets */
+@media (min-width: 577px) and (max-width: 992px) {
+  body {
+    font-size: 16px;
+  }
+  .contenedor {
+    flex-wrap: wrap;
+  }
+}
+
+/* Escritorio grande */
+@media (min-width: 993px) {
+  body {
+    font-size: 18px;
+  }
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* se acomoda solo */
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 1200px; /* no crecer demasiado en pantallas grandes */
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* === MATERIAL SNACKBAR PERSONALIZADO === */
+.success-snackbar {
+  background-color: #27ae60 !important;
+  color: white !important;
+}
+
+.success-snackbar .mat-mdc-button {
+  color: white !important;
+}
+
+/* === DIALOG PERSONALIZADO === */
+.product-dialog-container .mat-mdc-dialog-container {
+  padding: 0;
+  overflow: hidden;
 }

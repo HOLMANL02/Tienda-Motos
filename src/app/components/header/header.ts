@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CarritoService } from '../../services/carrito';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule],
+  standalone: true, 
+  imports: [RouterModule, CommonModule],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css']
 })
-export class Header {
+export class HeaderComponent {
+  get totalItems() {
+    return this.carritoService.totalItems();
+  }
 
+  constructor(private carritoService: CarritoService) {}
 }

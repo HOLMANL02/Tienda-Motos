@@ -1,14 +1,141 @@
-<h1>PRODUCTOS MOTO</h1>
+<div class="products-container">
 
-<section class="productos">
-  @for (producto of products; track producto.id) {
-    <article class="producto">
-      <img [src]="producto.image" [alt]="producto.name">
-      <h3>{{ producto.name }}</h3>
-      <p>{{ producto.description }}</p>
-      <strong>{{ producto.price }}</strong>
-      <br>
-      <button>Ver más</button>
-    </article>
-  }
-</section>
+  <!-- SIDEBAR LATERAL IZQUIERDO -->
+  <aside class="sidebar" [class.active]="sidebarVisible">
+    <div class="sidebar-header">
+      <h2><i class="fas fa-sliders-h"></i> Filtros</h2>
+      <button class="close-sidebar" (click)="toggleSidebar()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Búsqueda por texto -->
+    <div class="filter-section">
+      <label><i class="fas fa-search"></i> Buscar Producto</label>
+      <input
+        type="text"
+        placeholder="Escribe aquí..."
+        [(ngModel)]="textoBusqueda"
+        (input)="filtrarProductos()"
+        class="search-input"
+      />
+    </div>
+    
+
+    <!-- Filtro por categorías -->
+    <div class="filter-section">
+      <label><i class="fas fa-th-large"></i> Categorías</label>
+      <!-- Botón limpiar filtros -->
+    <button class="clear-filters" (click)="limpiarFiltros()">
+      <i class="fas fa-redo"></i> Limpiar Filtros
+    </button>
+      <div class="category-list">
+        <div class="category-item" [class.active]="category === ''" (click)="seleccionarCategoria('')">
+          <span>Todas</span>
+          <span class="count">({{ products.length }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Camas'" (click)="seleccionarCategoria('Camas')">
+          <span>Camas</span>
+          <span class="count">({{ contarPorCategoria('Camas') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Closet'" (click)="seleccionarCategoria('Closet')">
+          <span>Closet</span>
+          <span class="count">({{ contarPorCategoria('Closet') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Salas'" (click)="seleccionarCategoria('Salas')">
+          <span>Salas</span>
+          <span class="count">({{ contarPorCategoria('Salas') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Escritorios'" (click)="seleccionarCategoria('Escritorios')">
+          <span>Escritorios</span>
+          <span class="count">({{ contarPorCategoria('Escritorios') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Comedores'" (click)="seleccionarCategoria('Comedores')">
+          <span>Comedores</span>
+          <span class="count">({{ contarPorCategoria('Comedores') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Sillas'" (click)="seleccionarCategoria('Sillas')">
+          <span>Sillas</span>
+          <span class="count">({{ contarPorCategoria('Sillas') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Mesas'" (click)="seleccionarCategoria('Mesas')">
+          <span>Mesas</span>
+          <span class="count">({{ contarPorCategoria('Mesas') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Muebles de TV'" (click)="seleccionarCategoria('Muebles de TV')">
+          <span>Muebles de TV</span>
+          <span class="count">({{ contarPorCategoria('Muebles de TV') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Bibliotecas'" (click)="seleccionarCategoria('Bibliotecas')">
+          <span>Bibliotecas</span>
+          <span class="count">({{ contarPorCategoria('Bibliotecas') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Muebles de Exterior'" (click)="seleccionarCategoria('Muebles de Exterior')">
+          <span>Muebles de Exterior</span>
+          <span class="count">({{ contarPorCategoria('Muebles de Exterior') }})</span>
+        </div>
+        <div class="category-item" [class.active]="category === 'Accesorios'" (click)="seleccionarCategoria('Accesorios')">
+          <span>Accesorios</span>
+          <span class="count">({{ contarPorCategoria('Accesorios') }})</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+    <div class="content-header">
+      <h1 class="titulo-productos">PRODUCTOS HOME BY SAMHOL</h1>
+      <p class="results-count">
+        Mostrando {{ productosPaginados.length }} de {{ productosFiltrados.length }} productos
+      </p>
+    </div>
+
+    <!-- Grid de Productos -->
+    <section class="productos">
+      @for (producto of productosPaginados; track producto.id) {
+        <mat-card class="producto">
+          <img mat-card-image [src]="producto.image" [alt]="producto.name">
+          <mat-card-content>
+            <h3>{{ producto.name }}</h3>
+            <p class="description">{{ producto.description }}</p>
+            <strong class="price">{{ producto.price | currency:'COP ':'symbol':'1.0-0' }}</strong>
+          </mat-card-content>
+          <mat-card-actions class="producto-actions">
+            <button mat-raised-button color="accent" (click)="verDetalle(producto)">
+              <mat-icon>visibility</mat-icon>
+              Ver más
+            </button>
+            <button mat-mini-fab color="primary" (click)="agregarAlCarrito(producto)">
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+      
+      @if (productosFiltrados.length === 0) {
+        <div class="no-results">
+          <i class="fas fa-inbox"></i>
+          <p>No se encontraron productos con los filtros aplicados</p>
+        </div>
+      }
+    </section>
+
+    <!-- Paginación -->
+    <div class="paginacion">
+      <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
+        ← Anterior
+      </button>
+
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+
+      <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
+        Siguiente →
+      </button>
+    </div>
+  </main>
+</div>
+
+<!-- Overlay para cerrar sidebar en móvil -->
+<div class="sidebar-overlay" [class.active]="sidebarVisible" (click)="toggleSidebar()"></div>

@@ -1,1 +1,110 @@
-<p>contact works!</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Tienda Repuestos Motos</title>
+  
+    <!-- Font Awesome para iconos de info -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+    <link rel="stylesheet" href="contact.css">
+  </head>  
+
+<!-- Hero Section -->
+<section class="contact-hero">
+    <div class="container">
+      <h1>CONTÁCTANOS</h1>
+      <p>No hay nada que nos guste más que ayudar con tus necesidades de repuestos. 
+         ¡Trabajemos juntos para mantener tu moto en perfecto estado!</p>
+    </div>
+  </section>
+  
+  <!-- Contact Content -->
+  <section class="contact-content">
+    <div class="container">
+      <div class="contact-form-container">
+  
+        <!-- Formulario Angular -->
+        <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+
+            <!-- Nombre -->
+            <div class="form-group">
+              <label for="name">Nombre*</label>
+              <input type="text" id="name" name="name" 
+                     [(ngModel)]="contactData.name" 
+                     #nameField="ngModel" required>
+              <div class="error-message" *ngIf="nameField.invalid && nameField.touched">
+                El nombre es obligatorio
+              </div>
+            </div>
+          
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email*</label>
+              <input type="email" id="email" name="email" 
+                     [(ngModel)]="contactData.email" 
+                     #emailField="ngModel" required email>
+              <div class="error-message" *ngIf="emailField.invalid && emailField.touched">
+                Ingresa un email válido
+              </div>
+            </div>
+          
+            <!-- Empresa/Organización -->
+            <div class="form-group">
+              <label for="company">Empresa/Organización</label>
+              <input type="text" id="company" name="company" 
+                     [(ngModel)]="contactData.company" 
+                     #companyField="ngModel">
+            </div>
+          
+            <!-- Mensaje -->
+            <div class="form-group">
+              <label for="message">Mensaje*</label>
+              <textarea id="message" name="message" rows="5" 
+                        [(ngModel)]="contactData.message" 
+                        #msgField="ngModel" required></textarea>
+              <div class="error-message" *ngIf="msgField.invalid && msgField.touched">
+                El mensaje es obligatorio
+              </div>
+            </div>
+          
+            <!-- Botón -->
+            <button type="submit" class="submit-btn" [disabled]="contactForm.invalid">
+              Enviar Mensaje
+            </button>
+          </form>
+          
+  
+        <!-- Info de contacto -->
+        <div class="contact-info">
+          <h3>House By SamHol</h3>
+          <div class="info-item">
+            <i class="fas fa-location-dot"></i>
+            <p>Carrera 7 # 24-89, Oficina 470<br>Bogotá, Colombia</p>
+          </div>
+          
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <p>Asesores:</p>
+          </div>
+          <div style="text-align: left;">
+            <p> - Holman Cardenas: (320) 8873779</p>
+            <p> - Laura Rios: (301) 3276093</p>
+            <p> - Samuel Martin: (319) 2592801</p>
+          </div>
+  
+          <br>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <p>contacto@tiendamotos.com</p>
+          </div>
+          
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 10:00 AM - 2:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

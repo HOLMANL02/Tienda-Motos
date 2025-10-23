@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShoppingCart } from './shopping-cart';
+import { ProductDetailDialog } from './product-detail-dialog';
 
-describe('ShoppingCart', () => {
-  let component: ShoppingCart;
-  let fixture: ComponentFixture<ShoppingCart>;
+describe('ProductDetailDialog', () => {
+  let component: ProductDetailDialog;
+  let fixture: ComponentFixture<ProductDetailDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShoppingCart]
+      imports: [ProductDetailDialog]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ShoppingCart);
+    fixture = TestBed.createComponent(ProductDetailDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

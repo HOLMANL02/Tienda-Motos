@@ -1,14 +1,24 @@
 <header class="main-header">
   <nav class="nav-bar">
+    <!-- Logo a la izquierda -->
     <a class="nav-logo" routerLink="/">
       <i class="fas fa-couch"></i> HOUSE <span>BY SAMHOL</span>
     </a>
 
-    <div class="nav-links" id="navLinks">
-      <a routerLink="/">Inicio</a>
-      <a routerLink="/products">Productos</a>
-      <a routerLink="/contact">Contáctanos</a>
-      <a routerLink="/about">Acerca de</a>
+    <!-- Grupo derecho: links + carrito -->
+    <div class="nav-right">
+      <div class="nav-links" id="navLinks">
+        <a routerLink="/">Inicio</a>
+        <a routerLink="/products">Productos</a>
+        <a routerLink="/contact">Contáctanos</a>
+        <a routerLink="/about">Acerca de</a>
+      </div>
+
+      <!-- Icono del carrito -->
+      <div class="cart-icon" routerLink="/carrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">{{ totalItems }}</span>
+      </div>
     </div>
 
     <div class="menu-toggle" id="menuToggle">

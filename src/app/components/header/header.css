@@ -19,6 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .nav-logo {
@@ -45,6 +46,8 @@
 .nav-links {
   display: flex;
   gap: 35px;
+  margin-left: auto; /* Empuja todo a la derecha */
+  margin-right: 20px; /* Espacio antes del carrito */
 }
 
 .nav-links a {
@@ -112,4 +115,58 @@
 .main-header.scrolled {
   background: rgba(0, 0, 0, 0.85);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Carrito ---- */
+.cart-icon {
+  position: relative;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin-left: 0;
+}
+
+.cart-icon:hover {
+  color: #fdd835;
+  transform: scale(1.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #fdd835;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor para agrupar links + carrito */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacio entre links y carrito */
+  margin-left: auto; /* Empuja todo a la derecha */
+}
+
+/* Ajuste responsive */
+@media (max-width: 900px) {
+  .nav-right {
+    gap: 15px;
+  }
+  
+  .cart-icon {
+    order: 2; /* Mantiene el carrito visible en móvil */
+  }
+  
+  .nav-links {
+    position: fixed;
+  }
 }

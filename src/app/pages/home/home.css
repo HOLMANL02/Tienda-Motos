@@ -1,65 +1,142 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap');
 
 .home-section {
-  min-height: 100vh;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  background: url('/public/Imagenes/fondo.jpg') no-repeat center/cover;
+  color: white;
   font-family: 'Montserrat', sans-serif;
-  color: #fff;
-  text-align: center;
-  overflow: hidden;
 }
 
-.overlay {
+/* Capas de fondo (una por imagen) */
+.home-section::before,
+.home-section::after,
+.home-section .bg-third {
+  content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(20, 20, 20, 0.55);
-  backdrop-filter: blur(3px);
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 15s ease-in-out;
   z-index: 0;
 }
 
+/* Imagen 1 */
+.home-section::before {
+  background-image: url('/Imagenes/fondo1.jpg');
+  animation: fade1 18s infinite;
+}
+
+/* Imagen 2 */
+.home-section::after {
+  background-image: url('/Imagenes/fondo2.jpg');
+  animation: fade2 18s infinite;
+}
+
+/* Imagen 3 (usamos un div extra para el tercer fondo) */
+.home-section .bg-third {
+  background-image: url('/Imagenes/fondo3.jpg');
+  animation: fade3 18s infinite;
+}
+
+/* Overlay oscuro para mejorar contraste del texto */
+.home-section .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Contenido */
 .home-content {
   position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Animaciones de opacidad sincronizadas */
+@keyframes fade1 {
+  0%, 33% { opacity: 1; }
+  33.1%, 100% { opacity: 0; }
+}
+
+@keyframes fade2 {
+  0%, 33% { opacity: 0; }
+  33.1%, 66% { opacity: 1; }
+  66.1%, 100% { opacity: 0; }
+}
+
+@keyframes fade3 {
+  0%, 66% { opacity: 0; }
+  66.1%, 100% { opacity: 1; }
+}
+
+.highlight {
+  color: #ffea00;
+  text-shadow: 0 0 18px rgba(255, 234, 0, 0.9);
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.highlight-sub {
+  color: #ffea00;
+  text-shadow: 0 0 12px rgba(255, 234, 0, 0.7);
+  font-weight: 700;
+  font-size: 4rem; /* un poco más pequeño */
+  display: block;
+  margin-top: 8px;
+}
+.home-content {
   max-width: 850px;
-  padding: 60px 40px;
-  background: rgba(255, 255, 255, 0.08);
+  padding: 50px 40px;
+  background: rgba(0, 0, 0, 0.55);
   border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   z-index: 1;
   animation: fadeUp 1.2s ease-out;
 }
 
 .home-section h1 {
-  font-size: 3.5rem;
+  font-size: 3.8rem;
   font-weight: 900;
   margin-bottom: 20px;
   color: #fff;
-  text-shadow: 0 4px 10px rgba(0,0,0,0.7);
+  text-shadow: 0 4px 10px rgba(0,0,0,0.8); 
   letter-spacing: 2px;
+  animation: fadeUp 1.2s ease-out;
 }
 
 .highlight {
-  color: #fdd835;
-  text-shadow: 0 0 12px rgba(255, 234, 0, 0.8);
+  color: #ffffff; 
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
 }
 
+
+
 .home-section p {
-  font-size: 1.2rem;
-  line-height: 1.7;
+  font-size: 1.3rem;
   margin-bottom: 28px;
-  color: #e8e8e8;
+  line-height: 1.6;
+  color: #eaeaea;
+}
+
+.highlight {
+  color: #ffea00;
+  text-shadow: 0 0 18px rgba(255, 234, 0, 0.9);
 }
 
 .home-info {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 30px 35px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 28px 40px;
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-  backdrop-filter: blur(8px);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .home-info:hover {
@@ -70,33 +147,40 @@
 .home-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 24px;
-  padding: 14px 36px;
-  background: linear-gradient(135deg, #fdd835, #ffb300);
-  color: #202020;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 16px 40px;
+  background: linear-gradient(90deg, #ffea00,#3f3d2e);
+  color: #1c1c1c;
   font-weight: 700;
-  border-radius: 50px;
+  border-radius: 12px;
   text-decoration: none;
-  font-size: 1.1rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.4), 0 0 15px rgba(56, 70, 73, 0.6);
+  transition: all 0.35s ease;
 }
 
 .home-btn:hover {
-  background: linear-gradient(135deg, #ffeb3b, #ffc107);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(255, 193, 7, 0.6);
+  background: linear-gradient(90deg, #4c5858, #1d1d1c);
+  color: #5d666b;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6), 0 0 25px #ffea00;
 }
+
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes glowText {
+  from { text-shadow: 0 0 8px #ffea00, 0 0 12px rgba(0,198,255,0.6); }
+  to   { text-shadow: 0 0 20px #ffe600, 0 0 30px rgba(0,198,255,0.9); }
+}
+
+
 @media (max-width: 768px) {
-  .home-section h1 { font-size: 2.3rem; }
+  .home-section h1 { font-size: 2.4rem; }
   .home-section p { font-size: 1rem; }
   .home-btn { font-size: 1rem; padding: 12px 28px; }
-  .home-content { padding: 40px 25px; }
 }
