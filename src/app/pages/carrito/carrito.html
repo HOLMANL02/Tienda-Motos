@@ -1,54 +1,51 @@
-<section class="home-section">
-  <!-- Fondos animados -->
-  <div class="bg-third"></div>
-  <div class="overlay"></div>
+<div class="carrito-container">
+  <h2 class="titulo">Carrito de Compras</h2>
 
-  <!-- Contenedor del carrito -->
-  <div class="carrito-container">
-    <h2 class="carrito-titulo">Carrito</h2>
+  <div *ngIf="carritoService.items().length === 0" class="carrito-vacio">
+    <p>Tu carrito está vacío </p>
+    <button class="btn-volver" (click)="volverATienda()">Volver a la tienda</button>
+  </div>
 
-    <!-- Carrito vacío -->
-    <div *ngIf="carritoService.items().length === 0" class="carrito-vacio">
-      <p>No hay productos en el carrito.</p>
-      <button class="btn btn-tienda" (click)="volverATienda()">Volver a la tienda</button>
+  <div *ngIf="carritoService.items().length > 0">
+    <table class="tabla-carrito">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of carritoService.items()">
+          <td>{{ producto.nombre }}</td>
+          <td>${{ producto.precio }}</td>
+          <td class="cantidad">
+            <button (click)="cambiarCantidad(producto, -1)">−</button>
+            <span>{{ producto.cantidad || 1 }}</span>
+            <button (click)="cambiarCantidad(producto, 1)">+</button>
+          </td>
+          <td>${{ producto.precio * (producto.cantidad || 1) }}</td>
+          <td>
+            <button class="btn-eliminar" (click)="remove(producto.id)">✖</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="resumen">
+      <p><strong>Total de artículos:</strong> {{ totalItems() }}</p>
+      <p><strong>Total a pagar:</strong> ${{ totalPrice() }}</p>
     </div>
 
-    <!-- Lista de productos -->
-    <div *ngIf="carritoService.items().length > 0" class="carrito-lista">
-      <div *ngFor="let p of carritoService.items()" class="carrito-item">
-        <div class="item-info">
-          <img *ngIf="p.imagen" [src]="p.imagen" alt="{{ p.nombre }}" class="item-img" />
-          <div class="item-textos">
-            <h4 class="item-nombre">{{ p.nombre }}</h4>
-            <p class="item-precio">{{ p.precio | currency:'COP':'symbol':'1.0-0' }}</p>
-          </div>
-        </div>
-
-        <!-- Controles de cantidad -->
-        <div class="item-cantidades">
-          <button class="btn" (click)="cambiarCantidad(p, -1)">-</button>
-          <span class="item-cantidad">{{ p.cantidad || 1 }}</span>
-          <button class="btn" (click)="cambiarCantidad(p, 1)">+</button>
-        </div>
-
-        <!-- Botón eliminar -->
-        <button class="btn btn-eliminar" (click)="remove(p.id)">Eliminar</button>
-      </div>
+    <div class="acciones">
+      <button class="btn-limpiar" (click)="clear()">Limpiar Carrito</button>
+      <button class="btn-comprar" (click)="confirmarCompra()">Confirmar Compra</button>
     </div>
 
-    <hr *ngIf="carritoService.items().length > 0" class="divider">
-
-    <!-- Resumen -->
-    <div *ngIf="carritoService.items().length > 0" class="carrito-resumen">
-      <h3 class="resumen-total">
-        Total: <span class="resumen-valor">{{ totalPrice() | currency:'COP':'symbol':'1.0-0' }}</span>
-      </h3>
-
-      <div class="resumen-acciones">
-        <button class="btn btn-tienda" (click)="volverATienda()">Volver a la tienda</button>
-        <button class="btn btn-limpiar" (click)="clear()">Vaciar carrito</button>
-        <button class="btn btn-comprar" (click)="clear()">Confirmar compra</button>
-      </div>
+    <div class="volver">
+      <button class="btn-volver" (click)="volverATienda()">← Volver a la tienda</button>
     </div>
   </div>
-</section>
+</div>
