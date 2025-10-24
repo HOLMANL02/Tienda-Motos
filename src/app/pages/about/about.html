@@ -1,107 +1,112 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de - Tienda Motos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="about.css">
-</head>
-<body>
-    <!-- Seccion Acerca de -->
-    <section class="hero">
-        <div class="container">
-            <h1>Acerca de Home By SamHol</h1>
-            <p>Tu destino confiable para repuestos y accesorios de motos. Calidad, servicio y pasión por el mundo de las dos ruedas desde 2010.</p>
+<!-- Sección Acerca de -->
+<section class="hero">
+    <div class="container">
+      <h1>Acerca de {{ companyName }}</h1>
+      <p>Tu tienda de confianza en muebles de diseño, confort y calidad. 
+         Desde {{ foundationDate | date:'yyyy' }}, creamos espacios únicos para cada hogar.</p>
+      
+    </div>
+  </section>
+  
+  <!-- Sección Nuestra Historia -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Nuestra Historia</h2>
+      <div class="history-content">
+        <div class="history-text">
+          <p>Desde {{ getFormattedDate() }}, <strong>{{ getUpperCaseName() }}</strong> ha sido sinónimo de elegancia, funcionalidad y estilo en el mundo del mobiliario. Comenzamos como un pequeño taller familiar y hoy somos una tienda reconocida.</p>
+          <p>Con el tiempo, hemos ampliado nuestro catálogo incluyendo camas, closets, escritorios, salas, sillas y más, para cubrir todas las necesidades de tu hogar y oficina.</p>
+          <p>Nuestra misión es transformar espacios en lugares acogedores, duraderos y con personalidad.</p>
+          
+          <!-- Botones de Material -->
+          <div class="action-buttons">
+            <button mat-raised-button color="primary" routerLink="/products">
+              <mat-icon>shopping_cart</mat-icon>
+              Ver Productos
+            </button>
+            <button mat-stroked-button color="accent" routerLink="/contact">
+              <mat-icon>contact_mail</mat-icon>
+              Contáctanos
+            </button>
+          </div>
         </div>
-    </section>
-
-    <!-- Seccion Nuestra Historia -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Nuestra Historia</h2>
-            <div class="history-content">
-                <div class="history-text">
-                    <p>Desde 2010, Repuestos Motos ha sido líder en la venta de repuestos y accesorios de alta calidad, ofreciendo a nuestros clientes las mejores marcas y servicio especializado.</p>
-                    <p>Lo que comenzó como un pequeño local familiar, hoy se ha convertido en una referencia en el sector de repuestos para motocicletas, gracias a nuestro compromiso con la calidad y servicio al cliente.</p>
-                    <p>Nuestra misión siempre ha sido clara: proporcionar repuestos y accesorios excepcionales que satisfagan las necesidades de los amantes de las motos, junto con un servicio post-venta incomparable.</p>
-                </div>
-                <div class="history-image">
-                    <img src="https://images.unsplash.com/photo-1629616092586-636e3010398a?q=80&w=1146&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nuestra historia">
-                </div>      
+        <div class="history-image">
+          <img src="https://c4.wallpaperflare.com/wallpaper/333/986/322/interior-moderno-muebles-salon-wallpaper-preview.jpg" 
+               alt="Nuestra historia Home By SamHol">
+        </div>      
+      </div>
+    </div>
+  </section>
+  
+<!-- Sección Misión y Visión -->
+<section class="section mission-vision-section">
+    <div class="container">
+      <h2 class="section-title">Misión y Visión</h2>
+      <div class="mission-vision">
+        <!-- Tarjeta de Misión -->
+        <mat-card class="mission-card">
+          <mat-card-header>
+            <div mat-card-avatar class="mission-icon">
+              <i class="fas fa-bullseye"></i>
             </div>
-        </div>
-    </section>
-
-    <!-- Seccion Mision y Vision -->
-    <section class="section" style="background-color: #f1f2f6;">
-        <div class="container">
-            <h2 class="section-title">Misión y Visión</h2>
-            <div class="mission-vision">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3>Misión</h3>
-                    <p>Proveer repuestos y accesorios de excelente calidad con servicio personalizado que supere las expectativas de nuestros clientes, ofreciendo soluciones de mantenimiento confiables y eficientes.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3>Visión</h3>
-                    <p>Ser la tienda de repuestos y accesorios para motos preferida a nivel nacional, reconocida por nuestra calidad y compromiso con los motociclistas, expandiendo nuestra presencia con sucursales en las principales ciudades.</p>
-                </div>
+            <mat-card-title>Misión</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Ofrecer muebles de alta calidad que combinen funcionalidad, confort y estética, brindando soluciones personalizadas que se adapten al estilo de vida de nuestros clientes.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <!-- Tarjeta de Visión -->
+        <mat-card class="vision-card">
+          <mat-card-header>
+            <div mat-card-avatar class="vision-icon">
+              <i class="fas fa-eye"></i>
             </div>
-        </div>
-    </section>
-
-    <!-- Seccion Valores -->
-    <section class="values-container">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Nuestros Valores</h2>
-            <div class="values-list">
-                <div class="value-item">
-                    <i class="fas fa-medal"></i>
-                    <h3>Calidad</h3>
-                    <p>Ofrecemos solo repuestos y accesorios de la más alta calidad y durabilidad.</p>
-                </div>
-                <div class="value-item">
-                    <i class="fas fa-hands-helping"></i>
-                    <h3>Servicio</h3>
-                    <p>Nuestros clientes son nuestra prioridad, siempre.</p>
-                </div>
-                <div class="value-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Confianza</h3>
-                    <p>Generamos relaciones basadas en la honestidad y transparencia.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seccion Porque elegirnos -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">¿Por qué elegir Tienda Motos?</h2>
-            <div class="features">
-                <div class="feature">
-                    <span>🏍️</span>
-                    <h4>Amplio Inventario</h4>
-                    <p>Contamos con los mejores repuestos y accesorios para todas las marcas y modelos.</p>
-                </div>
-                <div class="feature">
-                    <span>🔧</span>
-                    <h4>Asesoramiento Especializado</h4>
-                    <p>Personal técnico capacitado para recomendar los productos adecuados.</p>
-                </div>
-                <div class="feature">
-                    <span>💰</span>
-                    <h4>Garantía y Calidad</h4>
-                    <p>Todos nuestros productos cuentan con garantía y son de primeras marcas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</body>
-</html>
+            <mat-card-title>Visión</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Ser la tienda líder en mobiliario del hogar en Latinoamérica, reconocida por su innovación, sostenibilidad y compromiso con la satisfacción del cliente.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Valores -->
+  <section class="values-container">
+    <div class="container">
+      <h2 class="section-title">Nuestros Valores</h2>
+      <div class="values-list">
+        <mat-card 
+          *ngFor="let value of values" 
+          class="value-card"
+          (click)="openValuesDialog(value)"
+          style="cursor: pointer;">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>{{ value.icon }}</mat-icon>
+            <mat-card-title>{{ value.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ value.description }}</p>
+            <small>Click para más detalles</small>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección Por qué elegirnos -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">¿Por qué elegir {{ companyName }}?</h2>
+      <div class="features">
+        <mat-card *ngFor="let feature of features" class="feature-card">
+          <mat-card-content>
+            <div class="feature-icon">{{ feature.icon }}</div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
