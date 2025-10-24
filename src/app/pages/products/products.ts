@@ -13,7 +13,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Componente del dialog
 import { ProductDetailDialogComponent } from '../../components/product-detail-dialog/product-detail-dialog';
-
+import { CarritoComponent } from '../../pages/carrito/carrito';
 @Component({
   selector: 'app-products',
   templateUrl: './products.html',
@@ -74,7 +74,8 @@ export class ProductosComponent {
     this.carritoService.addToCart({
       id: producto.id,
       nombre: producto.name,
-      precio: producto.price
+      precio: producto.price,
+      imagen: producto.image
     });
     
     // Notificación con MatSnackBar
@@ -155,4 +156,17 @@ export class ProductosComponent {
   get totalPaginas(): number {
     return Math.ceil(this.productosFiltrados.length / this.productosPorPagina);
   }
+
+  mostrarCarrito() {
+  const dialogRef = this.dialog.open(CarritoComponent, {
+    width: '600px',
+    height: '700px',
+    maxWidth: '95vw',
+    panelClass: 'carrito-dialog-container'
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    console.log('El carrito se cerró');
+  });
+}
 }
