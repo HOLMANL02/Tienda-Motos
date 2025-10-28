@@ -20,9 +20,7 @@ body {
 
 /* -------------------- HERO SECTION -------------------- */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url('https://media.admagazine.com/photos/672a4b264a905bfb73a1a9af/master/w_1600%2Cc_limit/09272024-natesheetsphoto-3.jpg')
-    no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   color: #fff;
   text-align: center;
   padding: 100px 20px;

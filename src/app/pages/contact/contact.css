@@ -1,13 +1,14 @@
+/* -------------------- RESET & BASE -------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', 'Montserrat', sans-serif;
 }
 
 body {
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: #1c1c1c;
+    color: #eaeaea;
     line-height: 1.6;
 }
 
@@ -17,12 +18,12 @@ body {
     padding: 0 20px;
 }
 
-/* Hero Section */
+/* -------------------- HERO SECTION -------------------- */
 .contact-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') 
-                no-repeat center center/cover;
-    color: #ffea00;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://www.google.com/search?sca_esv=397f9cbb68429dfc&sxsrf=AE3TifMxbNj34RIaJ4Gqf4MbidMnrGQqcQ:1761324407610&udm=2&fbs=AIIjpHx4nJjfGojPVHhEACUHPiMQht6_BFq6vBIoFFRK7qchKG1cRgcE0P7z3SNizmlu0QmZEw1flzsnacDfqVB6Mpb9KFv7a7dlxblFo-lqQlsZ3eGEwgdsIu07Yvsr3aHOf4zzo0jgMMtNO0Q2ixu29EeGi111brsqHft1OzNpm4VUnxIrKA9CKDLSC3rY9RiSzqNF8yJUJazN6eujlvQuxi8Y5v0vyH6ldmCwLMr1m7DSpcf9DxA&q=imagen+de+muebles&sa=X&sqi=2&ved=2ahUKEwi4jpndpL2QAxXJSjABHS3ALBAQtKgLegQIFBAB&biw=1920&bih=911&dpr=1#vhid=7omtSXuI2UjgAM&vssid=mosaic')
+        no-repeat center center/cover;
+    color: #ffd740;
     text-align: center;
     padding: 80px 20px;
 }
@@ -30,16 +31,17 @@ body {
 .contact-hero h1 {
     font-size: 48px;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .contact-hero p {
     font-size: 18px;
     max-width: 700px;
     margin: 0 auto;
+    color: #eaeaea;
 }
 
-/* Contact Content */
+/* -------------------- CONTACT CONTENT -------------------- */
 .contact-content {
     padding: 80px 0;
 }
@@ -53,10 +55,10 @@ body {
 .contact-form {
     flex: 1;
     min-width: 300px;
-    background: white;
+    background: #2d2d2d;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
 .form-group {
@@ -67,28 +69,30 @@ body {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #000000;
+    color: #ffd740;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #444;
     border-radius: 6px;
     font-size: 16px;
+    background: #1c1c1c;
+    color: #eaeaea;
     transition: border-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #000000;
+    border-color: #ffd740;
 }
 
 .submit-btn {
-    background: linear-gradient(90deg, #ffea00, #3f3d2e);
-    color: white;
+    background: linear-gradient(90deg, #ffd740, #ffab00);
+    color: #1c1c1c;
     border: none;
     padding: 15px 30px;
     border-radius: 6px;
@@ -103,6 +107,7 @@ body {
     transform: translateY(-3px);
 }
 
+/* -------------------- CONTACT INFO -------------------- */
 .contact-info {
     flex: 1;
     min-width: 300px;
@@ -110,7 +115,7 @@ body {
 
 .contact-info h3 {
     font-size: 28px;
-    color: #ffea00 ;
+    color: #ffd740;
     margin-bottom: 30px;
     position: relative;
 }
@@ -120,7 +125,7 @@ body {
     display: block;
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, #ffea00, #3f3d2e);
+    background: linear-gradient(90deg, #ffd740, #ffab00);
     margin-top: 10px;
     border-radius: 2px;
 }
@@ -133,7 +138,7 @@ body {
 
 .info-item i {
     font-size: 20px;
-    color:#ffea00;
+    color: #ffd740;
     margin-right: 15px;
     margin-top: 5px;
 }
@@ -141,18 +146,19 @@ body {
 .info-item p {
     font-size: 16px;
     line-height: 1.5;
+    color: #eaeaea;
 }
 
-/* Responsive Design */
+/* -------------------- RESPONSIVE -------------------- */
 @media (max-width: 768px) {
     .contact-hero h1 {
         font-size: 36px;
     }
-    
+
     .contact-hero p {
         font-size: 16px;
     }
-    
+
     .contact-form-container {
         flex-direction: column;
     }
@@ -162,11 +168,11 @@ body {
     .contact-hero {
         padding: 60px 20px;
     }
-    
+
     .contact-hero h1 {
         font-size: 32px;
     }
-    
+
     .contact-form {
         padding: 25px;
     }

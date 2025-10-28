@@ -100,7 +100,7 @@
           <mat-card-content>
             <h3>{{ producto.name }}</h3>
             <p class="description">{{ producto.description }}</p>
-            <strong class="price">{{ producto.price | currency:'COP ':'symbol':'1.0-0' }}</strong>
+            <strong class="price">{{ producto.price | currency:'COP ':'symbol':'1.0-0' }}</strong> <!--PIPE Formato de moneda COP -->
           </mat-card-content>
           <mat-card-actions class="producto-actions">
             <button mat-raised-button color="accent" (click)="verDetalle(producto)">
