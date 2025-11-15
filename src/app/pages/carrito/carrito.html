@@ -1,54 +1,105 @@
-<section class="home-section">
-  <div class="bg-third"></div>
-  <div class="overlay"></div>
+<h2 class="carrito-title">Carrito 💛</h2>
 
-  <div class="carrito-container">
-    <h2 class="carrito-titulo">Carrito</h2>
+<!-- LISTA DE PRODUCTOS -->
+<div class="carrito-lista">
+  <div *ngFor="let p of carritoService.items()" class="carrito-item">
+    <img [src]="p.imagen" class="item-img" alt="Producto">
 
-    <!-- Carrito vacío -->
-    <div *ngIf="carritoService.items().length === 0" class="carrito-vacio">
-      <p>No hay productos en el carrito.</p>
-      <button mat-raised-button color="primary" (click)="volverATienda()">Volver a la tienda</button>
-    </div>
-
-    <!-- Lista de productos -->
-    <div *ngIf="carritoService.items().length > 0" class="carrito-lista">
-      <div *ngFor="let p of carritoService.items()" class="carrito-item">
-        <div class="item-info">
-          <img *ngIf="p.imagen" [src]="p.imagen" alt="{{ p.nombre }}" class="item-img" />
-          <div class="item-textos">
-            <h4 class="item-nombre">{{ p.nombre }}</h4>
-            <p class="item-precio">{{ p.precio | currency:'COP ':'symbol':'1.0-0' }}</p>
-          </div>
-        </div>
-
-        <!-- Controles de cantidad -->
-        <div class="item-cantidades">
-          <button mat-mini-fab color="accent" (click)="cambiarCantidad(p, -1)">-</button>
-          <span class="item-cantidad">{{ p.cantidad || 1 }}</span>
-          <button mat-mini-fab color="accent" (click)="cambiarCantidad(p, 1)">+</button>
-        </div>
-
-        <!-- Botón eliminar -->
-        <button mat-icon-button color="warn" (click)="remove(p.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
-
-    <hr *ngIf="carritoService.items().length > 0" class="divider">
-
-    <!-- Resumen -->
-    <div *ngIf="carritoService.items().length > 0" class="carrito-resumen">
-      <h3 class="resumen-total">
-        Total: <span class="resumen-valor">{{ totalPrice() | currency:'COP ':'symbol':'1.0-0' }}</span>
-      </h3>
-
-      <div class="resumen-acciones">
-        <button mat-stroked-button color="primary" (click)="volverATienda()">Volver a la tienda</button>
-        <button mat-stroked-button color="warn" (click)="clear()">Vaciar carrito</button>
-        <button mat-raised-button color="accent" (click)="confirmarCompra()">Confirmar Compra</button>
-      </div>
+    <div class="info">
+      <h4>{{ p.nombre }}</h4>
+      <p>${{ p.precio }}</p>
+      <p>Cantidad: {{ p.cantidad || 1 }}</p>
     </div>
   </div>
-</section>
+</div>
+
+<button (click)="confirmarCompra()" class="btn-comprar">Comprar</button>
+
+
+<!-- FORMULARIO PRINCIPAL -->
+<div class="modal" *ngIf="mostrarFormulario">
+  <div class="modal-content">
+
+    <h3>Completar información</h3>
+
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="cliente.nombre" required>
+
+    <label>Correo:</label>
+    <input type="email" [(ngModel)]="cliente.correo" required>
+
+    <label>Teléfono:</label>
+    <input type="text" [(ngModel)]="cliente.telefono" required>
+
+    <label>Dirección:</label>
+    <input type="text" [(ngModel)]="cliente.direccion" required>
+
+    <label>Ciudad:</label>
+    <input type="text" [(ngModel)]="cliente.ciudad" required>
+
+    <label>Región:</label>
+    <input type="text" [(ngModel)]="cliente.region" required>
+
+    <label>Método de pago:</label>
+    <select [(ngModel)]="cliente.metodo_pago" required>
+      <option value="Nequi">Nequi</option>
+      <option value="Daviplata">Daviplata</option>
+      <option value="Efecty">Efecty</option>
+      <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+    </select>
+
+    <!-- NÚMERO DE CUENTA (Nequi, Daviplata, Efecty) -->
+    <div *ngIf="cliente.metodo_pago !== 'Tarjeta de crédito'">
+      <label>Número de cuenta:</label>
+      <input type="text" [(ngModel)]="cliente.numeroCuenta">
+    </div>
+
+    <!-- NEQUI / DAVIPLATA -->
+    <div *ngIf="cliente.metodo_pago === 'Nequi' || cliente.metodo_pago === 'Daviplata'">
+      <label>Código (5 dígitos):</label>
+      <input type="text" maxlength="5" [(ngModel)]="cliente.codigoVerificacion">
+    </div>
+
+    <!-- TARJETA -->
+    <div *ngIf="cliente.metodo_pago === 'Tarjeta de crédito'">
+      <label>Número de tarjeta (16 dígitos):</label>
+      <input type="text" maxlength="16" [(ngModel)]="cliente.numeroTarjeta">
+
+      <label>CVV (3 dígitos):</label>
+      <input type="text" maxlength="3" [(ngModel)]="cliente.cvv">
+    </div>
+
+    <div class="btns">
+      <button (click)="finalizarCompra()">Continuar</button>
+      <button class="cancelar" (click)="cerrarFormulario()">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- FORMULARIO RESUMEN FINAL -->
+<div class="modal" *ngIf="mostrarResumen">
+  <div class="modal-content">
+
+    <h3>Resumen de la compra</h3>
+
+    <p><b>Factura:</b> #{{ numeroFactura }}</p>
+    <p><b>Cliente:</b> {{ cliente.nombre }}</p>
+    <p><b>Método de pago:</b> {{ cliente.metodo_pago }}</p>
+    <p *ngIf="cliente.numeroCuenta"><b>Número de cuenta:</b> {{ cliente.numeroCuenta }}</p>
+
+    <h4>Productos:</h4>
+
+    <div *ngFor="let p of carritoService.items()" class="resumen-item">
+      <img [src]="p.imagen" class="item-img">
+      <span>{{ p.nombre }} (x{{ p.cantidad || 1 }})</span>
+      <span>${{ p.precio * (p.cantidad || 1) }}</span>
+    </div>
+
+    <h3>Total: ${{ totalPrice() }}</h3>
+
+    <button (click)="confirmarCompraFinal()">Finalizar Compra</button>
+
+  </div>
+</div>
